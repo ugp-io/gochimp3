@@ -16,14 +16,14 @@ type ListOfSegments struct {
 
 type SegmentRequest struct {
 	Name          string          `json:"name"`
-	StaticSegment []string        `json:"static_segment"`
+	StaticSegment *[]string        `json:"static_segment,omitempty"`
 	Options       *SegmentOptions `json:"options,omitempty"`
 }
 
 type Segment struct {
 	SegmentRequest
 
-	ID          string    `json:"id"`
+	ID          int    `json:"id"`
 	MemberCount int    `json:"member_count"`
 	Type        string `json:"type"`
 	CreatedAt   string `json:"created_at"`
@@ -70,6 +70,7 @@ type SegmentBatchError struct {
 
 // SegmentConditional represents parameters to filter by
 type SegmentConditional struct {
+	ConditionType string      `json:"condition_type"`
 	Field string      `json:"field"`
 	OP    string      `json:"op"`
 	Value interface{} `json:"value"`
